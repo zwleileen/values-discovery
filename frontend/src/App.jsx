@@ -31,7 +31,7 @@ return (
       </button>
     </div>
 
-    <div>
+    <div style={{ padding: "20px", maxWidth: "600px", margin: "auto" }}>
       {response && (
         <>
           {typeof response === "string" ? ( // ✅ If response is just a string, display only that
