@@ -1,8 +1,19 @@
 import React, { useState } from "react";
 
 function App() {
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState({
+    name: "",
+    values: "",
+  });
   const [response, setResponse] = useState("");
+
+  // 🔹 Handle changes in the name and values fields
+  const handleInputChange = (e) => {
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value, // ✅ Updates the correct field dynamically
+    });
+  };
 
   const handleSubmit = async () => {
     const res = await fetch("http://localhost:5001/api/chat", {
@@ -17,15 +28,19 @@ function App() {
 
 return (
   <>
+  <h1>Aligning values with work</h1>
+    
     <div style={{ padding: "20px", maxWidth: "600px", margin: "auto" }}>
-      <h2>Chat with GPT</h2>
-      <textarea
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        placeholder="Type your message..."
-        rows={4}
-        style={{ width: "100%" }}
-      />
+      <label htmlFor="name"><strong>Name: </strong></label>
+      <input type="text" name="name" id="name" value={input.name} onChange={handleInputChange}/>
+    </div>
+    
+    <div style={{ padding: "20px", maxWidth: "600px", margin: "auto" }}>
+      <label htmlFor="values"><strong>Rank values: </strong></label>
+      <textarea name="values" value={input.values} placeholder="Rank your values here..." onChange={handleInputChange} rows={5} />
+    </div>
+    
+    <div style={{ padding: "20px", maxWidth: "600px", margin: "auto" }}>
       <button onClick={handleSubmit} style={{ marginTop: "10px" }}>
         Send
       </button>

@@ -51,16 +51,21 @@ app.post("/api/chat", async (req, res) => {
             Do not return any extra text, just the JSON object.
           `,
         },
-        { role: "user", content: message },
+        {
+          role: "user",
+          content: `Name: ${message.name}\nValues Ranking: ${message.values}`,
+        }, // ✅ Convert object to formatted string,
       ],
       response_format: { type: "json_object" }, //ensure response is in json
     });
 
     const botResponse = JSON.parse(completion.choices[0].message.content); // ✅ Convert response to JSON
 
+    const userMessageString = `Name: ${message.name}\nValues Ranking: ${message.values}`; // ✅ Convert to string
+
     // 🔹 Store conversation in MongoDB
     const chatEntry = new Chat({
-      userMessage: message,
+      userMessage: userMessageString,
       botResponse: botResponse,
     });
 
