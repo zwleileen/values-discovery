@@ -37,7 +37,7 @@ return (
     
     <div style={{ padding: "20px", maxWidth: "600px", margin: "auto" }}>
       <label htmlFor="values"><strong>Rank values: </strong></label>
-      <textarea name="values" value={input.values} placeholder="Rank your values here..." onChange={handleInputChange} rows={5} />
+      <textarea name="values" value={input.values} placeholder="Rank your values here..." onChange={handleInputChange} rows={10} />
     </div>
     
     <div style={{ padding: "20px", maxWidth: "600px", margin: "auto" }}>
